@@ -1,0 +1,5 @@
+name: PlayerState
+author: Eric Lam
+version: ${project.version}
+main: com.ericlam.mc.playerstate.PlayerState
+depend: [ELDependenci, eld-sql-plugin, PlaceholderAPI]

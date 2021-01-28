@@ -1,0 +1,8 @@
+prefix: "[PLAYER-STATE]"
+success: "successfully set"
+failed: "set failed"
+no-state: "NO STATUS"
+fetch-failed: "fetch failed"
+regex-not-match: "your state is not valid"
+your-state: "your state is {0}"
+player-state: "{0}'s state is {1}"
