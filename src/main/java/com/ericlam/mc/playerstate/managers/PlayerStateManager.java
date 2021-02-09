@@ -8,8 +8,6 @@ import org.bukkit.OfflinePlayer;
 import org.jetbrains.annotations.NotNull;
 
 import javax.inject.Inject;
-import java.time.Duration;
-import java.time.LocalTime;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Pattern;
@@ -28,13 +26,12 @@ public class PlayerStateManager {
     private final Map<OfflinePlayer, String> stateMap = new ConcurrentHashMap<>();
 
     public void fetchPlayerState(OfflinePlayer player){
-        sqlManager.getPlayerState(player).thenRunSync(state -> stateMap.put(player, state)).join();
+        sqlManager.getPlayerState(player).thenRunSync(state -> stateMap.put(player, state == null ? lang.getLang().getPure("no-state") : state)).join();
     }
 
     @NotNull
     public String getPlayerState(OfflinePlayer player){
-        var result = this.stateMap.getOrDefault(player, lang.getLang().getPure("fetch-failed"));
-        return result == null ? lang.getLang().getPure("no-state") : result;
+        return this.stateMap.getOrDefault(player, lang.getLang().getPure("fetch-failed"));
     }
 
     public ScheduleService.BukkitPromise<Boolean> setPlayerState(OfflinePlayer player, String state) throws CommandException {
