@@ -8,12 +8,14 @@ import org.bukkit.OfflinePlayer;
 import org.jetbrains.annotations.NotNull;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Pattern;
 
 public class PlayerStateManager {
 
+    @Named("jpa")
     @Inject
     private PlayerStateSQLManager sqlManager;
 

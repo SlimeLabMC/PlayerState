@@ -2,13 +2,16 @@ package com.ericlam.mc.playerstate;
 
 import com.ericlam.mc.eld.ELDLifeCycle;
 import com.ericlam.mc.playerstate.managers.PlayerStateSQLManager;
+import com.ericlam.mc.playerstate.managers.PlayerStateSQLTraditional;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 public class PlayerStateLifeCycle implements ELDLifeCycle {
 
 
+    @Named("jpa")
     @Inject
     private PlayerStateSQLManager sqlManager;
 
@@ -17,7 +20,9 @@ public class PlayerStateLifeCycle implements ELDLifeCycle {
 
     @Override
     public void onEnable(JavaPlugin javaPlugin) {
-        sqlManager.createTable();
+        if (sqlManager instanceof PlayerStateSQLTraditional){
+            ((PlayerStateSQLTraditional) sqlManager).createTable();
+        }
         statePlaceholder.register();
     }
 
